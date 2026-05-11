@@ -12,9 +12,11 @@ const projects = [
       'Quiz logic, scoring, and answer tracking',
       'Full product lifecycle from design to deployment',
     ],
+    image: 'assets/projects/nec-app.jpg',
     live: 'https://apps.apple.com/us/app/nec-exam-prep-ca/id6748654051',
     github: 'https://github.com/JamesUccello',
   },
+
   {
     title: 'Uccello Foundation',
     type: 'Front-End Website',
@@ -26,9 +28,11 @@ const projects = [
       'Structured content sections',
       'Front-end UI presentation',
     ],
+    image: 'assets/projects/uccello-foundation.jpg',
     live: 'https://jamesuccello.github.io/uccellofoundation/index.html',
     github: 'https://github.com/JamesUccello/uccellofoundation',
   },
+
   {
     title: 'Taniti Island Project',
     type: 'UX / Front-End Project',
@@ -41,9 +45,11 @@ const projects = [
       'Responsive page structure',
       'Tourism-focused content organization',
     ],
+    image: 'assets/projects/taniti.jpg',
     live: 'https://jamesuccello.github.io/taniti-island-project/',
     github: 'https://github.com/JamesUccello/taniti-island-project',
   },
+
   {
     title: 'TinDog',
     type: 'Responsive Landing Page',
@@ -55,9 +61,11 @@ const projects = [
       'Bootstrap layout system',
       'Mobile-first design practice',
     ],
+    image: 'assets/projects/tindog.jpg',
     live: 'https://jamesuccello.github.io/Tindog/',
     github: 'https://github.com/JamesUccello/Tindog',
   },
+
   {
     title: 'Boutique Frenchies',
     type: 'Front-End Website',
@@ -69,6 +77,7 @@ const projects = [
       'Brand-focused UI design',
       'Structured visual sections',
     ],
+    image: 'assets/projects/boutique.jpg',
     live: 'https://jamesuccello.github.io/boutiquefrenchies/',
     github: 'https://github.com/JamesUccello/boutiquefrenchies',
   },
@@ -100,33 +109,65 @@ projectsGrid.innerHTML = projects
     (project) => `
     <div class="col-lg-6">
       <article class="project-card">
-        <p class="project-type">${project.type}</p>
-        <h3>${project.title}</h3>
-        <p class="mt-3">${project.description}</p>
 
-        <div class="mt-4">
-          ${project.tech.map((item) => `<span class="tech-badge">${item}</span>`).join('')}
+        <div class="project-content">
+
+          <p class="project-type">${project.type}</p>
+
+          <h3>${project.title}</h3>
+
+          <p class="mt-3">${project.description}</p>
+
+          <div class="mt-4">
+            ${project.tech
+              .map((item) => `<span class="tech-badge">${item}</span>`)
+              .join('')}
+          </div>
+
+          <ul class="mt-4">
+            ${project.highlights
+              .map((item) => `<li>${item}</li>`)
+              .join('')}
+          </ul>
+
+          <div class="project-links">
+            ${
+              project.live
+                ? `<a href="${project.live}" target="_blank" class="btn btn-primary">Live Project</a>`
+                : ''
+            }
+
+            <a
+              href="${project.github}"
+              target="_blank"
+              class="btn btn-outline-light"
+            >
+              GitHub
+            </a>
+          </div>
+
         </div>
 
-        <ul class="mt-4">
-          ${project.highlights.map((item) => `<li>${item}</li>`).join('')}
-        </ul>
+        <img
+          src="${project.image}"
+          alt="${project.title}"
+          class="project-thumbnail"
+        >
 
-        <div class="project-links">
-          ${project.live ? `<a href="${project.live}" target="_blank" class="btn btn-primary">Live Project</a>` : ''}
-          <a href="${project.github}" target="_blank" class="btn btn-outline-light">GitHub</a>
-        </div>
       </article>
     </div>
   `
   )
   .join('')
 
-skillsGrid.innerHTML = skills.map((skill) => `<span class="skill-pill">${skill}</span>`).join('')
+skillsGrid.innerHTML = skills
+  .map((skill) => `<span class="skill-pill">${skill}</span>`)
+  .join('')
 
 document.querySelectorAll('.nav-link').forEach((link) => {
   link.addEventListener('click', () => {
     const navbar = document.getElementById('portfolioNav')
+
     if (navbar.classList.contains('show')) {
       bootstrap.Collapse.getInstance(navbar).hide()
     }
@@ -142,5 +183,8 @@ window.addEventListener('scroll', () => {
 })
 
 backToTop.addEventListener('click', () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' })
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth',
+  })
 })
